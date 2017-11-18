@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+require 'kajiki'
+require 'mos-eisley'
+
+
+opts = Kajiki.preset_options(:server, {config: true})
+
+Kajiki.run(opts) do |cmd|
+  case cmd
+  when 'start'
+    MosEisley::Config.load_config(opts[:config]) if opts[:config]
+    MosEisley::Handler.autoload
+    require 'http-server/server'
+    MosEisley.logger.warn('Mos Eisley server starting...')
+    MosEisley::Server.run!({bind: opts[:address], port: opts[:port]})
+  end
+end
