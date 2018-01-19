@@ -1,24 +1,17 @@
 require 'logger'
 
-
 module MosEisley
-
   def self.logger=(logger)
     @logger = logger
   end
 
   def self.logger
-    @logger ||= NullLogger.new()
+    @logger ||= NullLogger.new
   end
 
   class NullLogger < Logger
+    def initialize(*args); end
 
-    def initialize(*args)
-    end
-
-    def add(*args, &block)
-    end
-
+    def add(*args, &block); end
   end
-
 end

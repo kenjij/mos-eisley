@@ -30,7 +30,7 @@ module MosEisley
       halt 400 if event.nil?
       logger.debug("Parsed JSON data:\n#{event}")
       unless valid_token?(event[:token])
-        logger.debug("Invalid Slack Events token: #{event[:token]}")
+        logger.warn("Invalid Slack Events token: #{event[:token]}")
         halt 401
       end
       res = Handler.run(:action, S3PO.create_event(event, :action))
@@ -49,7 +49,7 @@ module MosEisley
       logger.info('Incoming request received at /command.')
       cmd = parse_command(params)
       unless valid_token?(cmd[:token])
-        logger.debug("Invalid Slack Events token: #{cmd[:token]}")
+        logger.warn("Invalid Slack Events token: #{cmd[:token]}")
         halt 401
       end
       res = Handler.run(:command, cmd)
@@ -71,7 +71,7 @@ module MosEisley
       logger.debug("Parsed JSON data:\n#{event}")
       
       unless valid_token?(event[:token])
-        logger.debug("Invalid Slack Events token: #{event[:token]}")
+        logger.warn("Invalid Slack Events token: #{event[:token]}")
         halt 401
       end
       resp = {}

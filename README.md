@@ -58,6 +58,8 @@ end
 
 Define handlers, also a Ruby file, and they'll be executed as incoming Slack events are processed. You can define as many handlers as you want. You'll store the file(s) in the directory you've identified in the configuration file above.
 
+There are 3 types of handlers you can define: `:action`, `:command`, `:event`, which corresponds to the MosEisley endpoints accordingly.
+
 ```ruby
 ME::Handler.add(:event, 'debug') do |e, h|
   e.event.each { |k, v| puts "#{k}: #{v}" }
@@ -68,9 +70,14 @@ end
 
 ### Slack
 
+Create an app in Slack to setup a bot. Following features can be setup.
 
+- **Interactive Components** – Request URL should be set to MosEisley's `/action` endpoint.
+- **Slash Commands** – Request URL should be set to MosEisley's `/command` endpoint.
+- **OAuth & Permission** – This is where you get the Bot User OAuth Access Token you need to set in the configuration file.
+- **Event Subscription** – Request URL should be set to MosEisley's `/event` endpoint. You'll likely Subscribe to Bot Events of `app_mention` or any of the `message.*` events.
 
-## Usage
+## CLI Usage
 
 To see help:
 

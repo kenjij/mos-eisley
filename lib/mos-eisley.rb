@@ -1,3 +1,4 @@
+require 'mos-eisley/version'
 require 'mos-eisley/logger'
 require 'mos-eisley/config'
 require 'mos-eisley/handler'

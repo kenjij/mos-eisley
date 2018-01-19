@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.required_ruby_version = '>= 2.1'
-  s.add_runtime_dependency 'kajiki', '~> 1.1'
-  s.add_runtime_dependency 'thin', '~> 1.7'
-  s.add_runtime_dependency 'sinatra', '~> 2.0'
   s.add_runtime_dependency 'em-http-request', '~> 1.1'
+  s.add_runtime_dependency 'kajiki', '~> 1.1'
+  s.add_runtime_dependency 'sinatra', '~> 2.0'
+  s.add_runtime_dependency 'thin', '~> 1.7'
 end

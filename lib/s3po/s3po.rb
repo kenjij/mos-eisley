@@ -54,7 +54,7 @@ module MosEisley
     def self.create_event(e, type = nil)
       type ||= e[:type] if e[:type]
       case type
-      when 'message'
+      when 'message', 'app_mention'
         return Message.new(e)
       when :action
         return Action.new(e)

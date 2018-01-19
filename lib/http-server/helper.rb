@@ -1,9 +1,7 @@
 require 's3po/s3po'
 
 module MosEisley
-
   module Helper
-
     def logger
       MosEisley.logger
     end
@@ -30,7 +28,5 @@ module MosEisley
     def json_with_object(obj, pretty: true, opts: nil)
       MosEisley::S3PO.json_with_object(obj, pretty: pretty, opts: opts)
     end
-
   end
-
 end
