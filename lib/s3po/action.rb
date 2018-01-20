@@ -1,9 +1,6 @@
 module MosEisley
-
   module S3PO
-
     class Action
-
       attr_reader :event
       attr_reader :original_message
 
@@ -45,9 +42,6 @@ module MosEisley
       def message_age
         Time.now.to_i - message_ts.to_i
       end
-
     end
-
   end
-
 end

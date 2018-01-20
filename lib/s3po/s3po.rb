@@ -5,9 +5,7 @@ require 's3po/action'
 require 's3po/message'
 
 module MosEisley
-
   module S3PO
-
     def self.parse_json(json)
       return JSON.parse(json, {symbolize_names: true})
     rescue => e
@@ -62,7 +60,5 @@ module MosEisley
         return GenericEvent.new(e)
       end
     end
-
   end
-
 end

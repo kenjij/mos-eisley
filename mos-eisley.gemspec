@@ -4,7 +4,7 @@ require 'mos-eisley/version'
 
 Gem::Specification.new do |s|
   s.name          = 'mos-eisley'
-  s.version       = MosEisley::Version
+  s.version       = MosEisley::VERSION
   s.authors       = ['Ken J.']
   s.email         = ['kenjij@gmail.com']
   s.summary       = %q{A Ruby based multi-purpose Slack app server}

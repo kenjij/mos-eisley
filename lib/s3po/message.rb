@@ -1,9 +1,6 @@
 module MosEisley
-
   module S3PO
-
     class Message
-
       attr_reader :event
 
       def initialize(e)
@@ -41,8 +38,17 @@ module MosEisley
         event[:text]
       end
 
+      # Defines text; existing string will be overwritten
+      # @param t [String] text to assign
       def text=(t)
         event[:text] = t
+      end
+
+      # Adds text after a space if text already exists
+      # @param t [String] text to add
+      def add_text(t)
+        nt = [event[:text], t].compact.join(' ')
+        event[:text] = nt[0].upcase + nt[1..-1]
       end
 
       def attachments
@@ -87,13 +93,16 @@ module MosEisley
         return obj
       end
 
+      # Create a new Message object for replying; pre-fills some attributes
+      # @param t [String] thread timestamp; only when replying as a thread (better to call #reply_in_thread instead)
+      # @return [MosEisley::S3PO::Message]
       def reply(t = nil)
         s = {
           channel: channel,
           as_user: true,
           attachments: []
         }
-        s[:text] = "<@#{user}> " unless message_type == :im
+        s[:text] = "<@#{user}>" unless message_type == :im
         if thread_ts
           s[:thread_ts] = thread_ts
         elsif t
@@ -107,9 +116,6 @@ module MosEisley
         t ||= ts
         reply(t)
       end
-
     end
-
   end
-
 end
