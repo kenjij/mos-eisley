@@ -46,9 +46,11 @@ module MosEisley
 
       # Adds text after a space if text already exists
       # @param t [String] text to add
+      # @return [Object] self
       def add_text(t)
         nt = [event[:text], t].compact.join(' ')
         event[:text] = nt[0].upcase + nt[1..-1]
+        return self
       end
 
       def attachments
@@ -79,11 +81,17 @@ module MosEisley
         event[:thread_ts]
       end
 
-      def arguments
+      def text_body
         return nil unless simple_message?
         t = event[:text]
         t = t.sub(/^<@#{MosEisley.config.meta[:user_id]}[|]?[^>]*>/, '') if for_me?
-        t.split
+        return t
+      end
+
+      def text_plain
+        t = text_body
+        return nil unless t
+        return S3PO.decode_text(t)
       end
 
       def postable_object

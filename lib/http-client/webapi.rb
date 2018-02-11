@@ -9,6 +9,10 @@ module MosEisley
       end
     end
 
+    def self.me_message(channel:, text:)
+      post_to_slack('chat.meMessage', {channel: channel, text: text})
+    end
+
     def self.post_message(msg)
       post_to_slack('chat.postMessage', msg)
     end

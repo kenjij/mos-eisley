@@ -60,5 +60,43 @@ module MosEisley
         return GenericEvent.new(e)
       end
     end
+
+    # Escape string with basic Slack rules; no command encoding is done as it often requires more information than provided in the text
+    # @param text [String] string to escape
+    # @return [String] escaped text
+    def self.escape_text(text)
+      esced = String.new(text)
+      esced.gsub!('&', '&amp;')
+      esced.gsub!('<', '&lt;')
+      esced.gsub!('>', '&gt;')
+      return esced
+    end
+
+    # Return plain text parsing Slack escapes and commands
+    # @param text [String] string to decode
+    # @return [String] plain text
+    def self.decode_text(text)
+      plain = String.new(text)
+      # keep just the labels
+      plain.gsub!(/<([#@]*)[^>|]*\|([^>]*)>/, '<\1\2>')
+      # process commands
+      plain.gsub!(/<!(everyone|channel|here)>/, '<@\1>')
+      plain.gsub!(/<!(.*?)>/, '<\1>')
+      # remove brackets
+      plain.gsub!(/<(.*?)>/, '\1')
+      # unescape
+      plain.gsub!('&gt;', '>')
+      plain.gsub!('&lt;', '<')
+      plain.gsub!('&amp;', '&')
+      return plain
+    end
+
+    # Enclose Slack command in control characters
+    # @param cmd [String] command
+    # @param label [String] optional label
+    # @return [String] escaped command
+    def self.escape_command(cmd, label = nil)
+      "<#{cmd}" + (label ? "|#{label}" : '') + '>'
+    end
   end
 end
