@@ -41,7 +41,7 @@ module MosEisley
       when Hash
         val.reduce({}) { |h, (k, v)| h.merge({k => s3po.format_json_value(v)}) }
       when String
-        val.encode!('UTF-8', {invalid: :replace, undef: :replace})
+        val.encode('UTF-8', {invalid: :replace, undef: :replace})
       when Time
         val.utc.iso8601
       else
