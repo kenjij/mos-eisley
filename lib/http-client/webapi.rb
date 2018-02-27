@@ -21,6 +21,14 @@ module MosEisley
       post_to_slack('chat.postEphemeral', msg)
     end
 
+    def self.update(msg)
+      post_to_slack('chat.update', msg)
+    end
+
+    def self.dialog_open(msg)
+      post_to_slack('dialog.open', msg)
+    end
+
     private
 
     def self.post_to_slack(method, data = nil, abort_on_err = false, &block)
