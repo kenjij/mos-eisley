@@ -39,6 +39,17 @@ module MosEisley
         event[:actions][0]
       end
 
+      def action_value
+        v = nil
+        case action[:type].to_sym
+        when :button
+          v = action[:value]
+        when :select
+          v = action[:selected_options][0][:value]
+        end
+        return v
+      end
+
       def callback_id
         event[:callback_id]
       end
